@@ -65,8 +65,10 @@ class PTBTokenizer:
         for k, line in zip(image_id, lines):
             if not k in final_tokenized_captions_for_image:
                 final_tokenized_captions_for_image[k] = []
-            tokenized_caption = ' '.join([w for w in line.rstrip().split(b' ')
-                                          if w not in PUNCTUATIONS])
-            final_tokenized_captions_for_image[k].append(tokenized_caption.encode())
+            tokenized_caption = b' '.join([w for w in line.rstrip().split(b' ')
+                                           if w.decode() not in PUNCTUATIONS])
+            if isinstance(tokenized_caption, str):
+                tokenized_caption = bytearray(tokenized_caption)
+            final_tokenized_captions_for_image[k].append(tokenized_caption)
 
         return final_tokenized_captions_for_image
