@@ -67,6 +67,6 @@ class PTBTokenizer:
                 final_tokenized_captions_for_image[k] = []
             tokenized_caption = ' '.join([w for w in line.rstrip().split(b' ')
                                           if w not in PUNCTUATIONS])
-            final_tokenized_captions_for_image[k].append(tokenized_caption)
+            final_tokenized_captions_for_image[k].append(tokenized_caption.encode())
 
         return final_tokenized_captions_for_image
